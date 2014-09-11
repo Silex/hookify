@@ -38,22 +38,18 @@
        (s-ends-with? "-hook" (symbol-name symbol))))
 
 ;;;###autoload
-(defun hookify (hook function)
-  "Append FUNCTION to HOOK."
-  (interactive
-   (list (intern (completing-read "hook: " obarray 'is-hook-p t))
-         (let ((minibuffer-completing-symbol t))
-           (read-from-minibuffer "function: " nil read-expression-map t 'read-expression-history))))
-  (add-hook hook `(lambda () ,function) nil t))
+(defun hookify (hook function &optional remove)
+  "Append or remove FUNCTION to HOOK.
 
-;;;###autoload
-(defun unhookify (hook function)
-  "Remove FUNCTION from HOOK."
+If REMOVE is true, removes the function from the hook, otherwise append it."
   (interactive
    (list (intern (completing-read "hook: " obarray 'is-hook-p t))
          (let ((minibuffer-completing-symbol t))
-           (read-from-minibuffer "function: " nil read-expression-map t 'read-expression-history))))
-  (remove-hook hook `(lambda () ,function) t))
+           (read-from-minibuffer "function: " nil read-expression-map t 'read-expression-history))
+         current-prefix-arg))
+  (if remove
+      (remove-hook hook `(lambda () ,function) t)
+    (add-hook hook `(lambda () ,function) nil t)))
 
 (provide 'hookify)
 

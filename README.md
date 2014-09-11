@@ -14,11 +14,7 @@ Otherwise, simply add `hookify.el` to your load-path and then `(require 'hookify
 
 <kbd>M-x hookify</kbd> asks for a hook, and then for some elisp to run when that hook triggers.
 
-### unhookify
-
-<kbd>M-x unhookify</kbd> ask you for a hook, and then for some elisp
-to remove from that hook (you can search the history for your
-previously entered hooks).
+With a prefix argument, removes the function from the hook.
 
 ## Examples
 
