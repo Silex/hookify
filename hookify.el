@@ -44,7 +44,7 @@
    (list (intern (completing-read "hook: " obarray 'is-hook-p t))
          (let ((minibuffer-completing-symbol t))
            (read-from-minibuffer "function: " nil read-expression-map t 'read-expression-history))))
-  (add-hook hook function nil t))
+  (add-hook hook `(lambda () ,function) nil t))
 
 ;;;###autoload
 (defun unhookify (hook function)
@@ -53,7 +53,7 @@
    (list (intern (completing-read "hook: " obarray 'is-hook-p t))
          (let ((minibuffer-completing-symbol t))
            (read-from-minibuffer "function: " nil read-expression-map t 'read-expression-history))))
-  (remove-hook hook function t))
+  (remove-hook hook `(lambda () ,function) t))
 
 (provide 'hookify)
 
