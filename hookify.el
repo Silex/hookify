@@ -38,18 +38,18 @@
        (s-ends-with? "-hook" (symbol-name symbol))))
 
 ;;;###autoload
-(defun hookify (hook function &optional remove)
-  "Append or remove FUNCTION to HOOK.
+(defun hookify (hook form &optional remove)
+  "Append or remove FORM to HOOK.
 
-If REMOVE is true, removes the function from the hook, otherwise append it."
+If REMOVE is true, removes the form from the hook, otherwise append it."
   (interactive
    (list (intern (completing-read "hook: " obarray 'hookify-is-hook-p t))
          (let ((minibuffer-completing-symbol t))
-           (read-from-minibuffer "function: " nil read-expression-map t 'read-expression-history))
+           (read-from-minibuffer "form: " nil read-expression-map t 'read-expression-history))
          current-prefix-arg))
   (if remove
-      (remove-hook hook `(lambda () ,function) t)
-    (add-hook hook `(lambda () ,function) nil t)))
+      (remove-hook hook `(lambda () ,form) t)
+    (add-hook hook `(lambda () ,form) nil t)))
 
 (provide 'hookify)
 
