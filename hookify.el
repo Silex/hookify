@@ -43,9 +43,9 @@
 
 If REMOVE is true, removes the form from the hook, otherwise append it."
   (interactive
-   (list (intern (completing-read "hook: " obarray 'hookify-is-hook-p t))
+   (list (intern (completing-read "Hook: " obarray 'hookify-is-hook-p t))
          (let ((minibuffer-completing-symbol t))
-           (read-from-minibuffer "form: " nil read-expression-map t 'read-expression-history))
+           (read-from-minibuffer "Form: " nil read-expression-map t 'read-expression-history))
          current-prefix-arg))
   (if remove
       (remove-hook hook `(lambda () ,form) t)
