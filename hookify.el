@@ -32,7 +32,7 @@
 (require 's)
 (require 'dash)
 
-(defun is-hook-p (symbol)
+(defun hookify-is-hook-p (symbol)
   "Returns t if SYMBOL is a hook."
   (and (boundp symbol)
        (s-ends-with? "-hook" (symbol-name symbol))))
@@ -43,7 +43,7 @@
 
 If REMOVE is true, removes the function from the hook, otherwise append it."
   (interactive
-   (list (intern (completing-read "hook: " obarray 'is-hook-p t))
+   (list (intern (completing-read "hook: " obarray 'hookify-is-hook-p t))
          (let ((minibuffer-completing-symbol t))
            (read-from-minibuffer "function: " nil read-expression-map t 'read-expression-history))
          current-prefix-arg))
