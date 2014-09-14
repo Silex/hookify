@@ -38,18 +38,20 @@
        (s-ends-with? "-hook" (symbol-name symbol))))
 
 ;;;###autoload
-(defun hookify (hook form &optional remove)
-  "Append or remove FORM to HOOK.
+(defun hookify (hook form &optional global remove)
+  "Append or remove a lambda containing FORM to HOOK.
 
+If GLOBAL is true, make a global hook, otherwise a local one.
 If REMOVE is true, removes the form from the hook, otherwise append it."
   (interactive
    (list (intern (completing-read "Hook: " obarray 'hookify-is-hook-p t))
          (let ((minibuffer-completing-symbol t))
            (read-from-minibuffer "Form: " nil read-expression-map t 'read-expression-history))
+         (equal (read-char-exclusive "Global hook (default: no) ? (y/n) ") ?y)
          current-prefix-arg))
   (if remove
-      (remove-hook hook `(lambda () ,form) t)
-    (add-hook hook `(lambda () ,form) nil t)))
+      (remove-hook hook `(lambda () ,form) global)
+    (add-hook hook `(lambda () ,form) nil global)))
 
 (provide 'hookify)
 
