@@ -50,8 +50,8 @@ If REMOVE is true, removes the form from the hook, otherwise append it."
          (equal (read-char-exclusive "Global hook (default: no) ? (y/n) ") ?y)
          current-prefix-arg))
   (if remove
-      (remove-hook hook `(lambda () ,form) global)
-    (add-hook hook `(lambda () ,form) nil global)))
+      (remove-hook hook `(lambda () ,form) (not global))
+    (add-hook hook `(lambda () ,form) nil (not global))))
 
 (provide 'hookify)
 
