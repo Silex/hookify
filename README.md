@@ -4,7 +4,7 @@ Interactive commands to create temporary hooks.
 
 ## Installation
 
-The recommended way to install hookify is through MELPA.
+The recommended way to install hookify is through [MELPA](https://github.com/milkypostman/melpa).
 
 Otherwise, simply add `hookify.el` to your load-path and then `(require 'hookify)`.
 
