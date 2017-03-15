@@ -1,3 +1,6 @@
+[![MELPA](http://melpa.org/packages/hookify-badge.svg)](http://melpa.org/#/hookify)
+[![MELPA Stable](http://stable.melpa.org/packages/hookify-badge.svg)](http://stable.melpa.org/#/hookify)
+
 # Hookify
 
 Interactive commands to create temporary hooks.
